@@ -1,0 +1,38 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Sample is 
+    PORT (
+	   --   Clock : in std_logic; -- odświeżanie 50 HZ
+			Bt_1 : in std_logic;
+			Bt_2 : in std_logic;
+			Bt_3 : in std_logic;
+			Display : out std_logic_vector (3 downto 0)
+	      );
+end Sample;
+
+architecture rt1 of Sample is 
+			--------------------------
+			 SIGNAL sigDisplay : std_logic_vector(3 downto 0);
+			--------------------------
+begin 
+
+      process (Bt_1)
+		begin
+		    
+			 if (Bt_2 = '1') then
+			                      sigDisplay <= "0000";
+			 elsif rising_edge(Bt_1) then 
+			                       if (sigDisplay = "1111") then 
+										            sigDisplay <= "0000";
+										  else 
+										            sigDisplay <= sigDisplay + "0001";
+										  end if;
+			 elsif (Bt_3 = '1') then 
+			                       sigDisplay <= "0011";
+			 end if;
+			 
+			 Display <= sigDisplay;
+										  
+			           
+end architecture;			 
